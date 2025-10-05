@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background-color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  transition: background 1.5s ease;
+}
+
+#container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Themes */
+body.theme-molten {
+  background: linear-gradient(180deg, #000000 0%, #100500 50%, #1f0a00 100%);
+}
+body.theme-molten .glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 100, 0, 0.05) 0%,
+    rgba(200, 50, 0, 0.05) 50%,
+    transparent 65%
+  );
+}
+body.theme-molten #controls {
+  background: rgba(50, 20, 10, 0.3);
+  border-color: rgba(255, 120, 50, 0.4);
+}
+body.theme-molten .theme-btn.active,
+body.theme-molten .action-btn.active {
+  background: rgba(255, 100, 0, 0.5);
+  border-color: rgba(255, 100, 0, 0.7);
+}
+body.theme-molten .toggle-slider {
+  background: rgba(180, 80, 40, 0.4);
+}
+body.theme-molten input:checked + .toggle-slider {
+  background-color: rgba(255, 100, 0, 0.6);
+}
+body.theme-molten .toggle-slider:before {
+  box-shadow: 0 0 8px rgba(255, 150, 50, 0.8);
+}
+
+body.theme-cosmic {
+  background: linear-gradient(180deg, #000000 0%, #050010 50%, #0a001f 100%);
+}
+body.theme-cosmic .glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(147, 112, 219, 0.05) 0%,
+    rgba(75, 0, 130, 0.05) 50%,
+    transparent 65%
+  );
+}
+body.theme-cosmic #controls {
+  background: rgba(40, 20, 60, 0.3);
+  border-color: rgba(147, 112, 219, 0.4);
+}
+body.theme-cosmic .theme-btn.active,
+body.theme-cosmic .action-btn.active {
+  background: rgba(147, 112, 219, 0.5);
+  border-color: rgba(147, 112, 219, 0.7);
+}
+body.theme-cosmic .toggle-slider {
+  background: rgba(147, 112, 219, 0.4);
+}
+body.theme-cosmic input:checked + .toggle-slider {
+  background-color: rgba(147, 112, 219, 0.6);
+}
+body.theme-cosmic .toggle-slider:before {
+  box-shadow: 0 0 8px rgba(170, 130, 230, 0.8);
+}
+
+body.theme-emerald {
+  background: linear-gradient(180deg, #000000 0%, #001005 50%, #001f0a 100%);
+}
+body.theme-emerald .glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 127, 0.05) 0%,
+    rgba(46, 139, 87, 0.05) 50%,
+    transparent 65%
+  );
+}
+body.theme-emerald #controls {
+  background: rgba(20, 60, 40, 0.3);
+  border-color: rgba(60, 179, 113, 0.4);
+}
+body.theme-emerald .theme-btn.active,
+body.theme-emerald .action-btn.active {
+  background: rgba(60, 179, 113, 0.5);
+  border-color: rgba(60, 179, 113, 0.7);
+}
+body.theme-emerald .toggle-slider {
+  background: rgba(60, 179, 113, 0.4);
+}
+body.theme-emerald input:checked + .toggle-slider {
+  background-color: rgba(60, 179, 113, 0.6);
+}
+body.theme-emerald .toggle-slider:before {
+  box-shadow: 0 0 8px rgba(100, 200, 150, 0.8);
+}
+
+/* Glow overlay */
+.glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  transition: background 1.5s ease;
+}
+
+/* Controls */
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 10px 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: background 1.5s ease, border-color 1.5s ease;
+}
+
+#theme-selector,
+#action-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-btn,
+.action-btn {
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.theme-btn:hover,
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-btn.active,
+.action-btn.active {
+  color: #fff;
+  font-weight: 500;
+}
+
+.toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-option label[for='animateToggle'] {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+.toggle-slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+input:checked + .toggle-slider:before {
+  transform: translateX(22px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    width: auto;
+    bottom: 15px;
+  }
+  .separator {
+    display: none;
+  }
+}
